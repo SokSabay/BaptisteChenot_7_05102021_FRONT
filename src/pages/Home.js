@@ -5,10 +5,10 @@ import Navbar from "../components/Navbar";
 
 
 const Home = () => {
-
   const [newsData, setNewsData] = useState([]);
   const [title, setTitle] = useState([]);
   const [gif, setGif] = useState([]);
+  console.log(newsData);
 
   const token = localStorage.getItem("token");
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -20,8 +20,9 @@ const Home = () => {
   }, []);
 
   const getData = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/posts/`).then((res) => {
-        console.log(res.data);
+    axios.get(`${process.env.REACT_APP_API_URL}/posts/`)
+    .then((res) => {
+
       setNewsData(res.data);    
 
     
