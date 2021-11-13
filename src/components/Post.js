@@ -21,6 +21,10 @@ const Post = () => {
             value=""
           />
         </div>
+        <div className="post-form">
+         <label htmlFor="file">File</label>
+         <input type="file" id="file" accept=".gif" />
+        </div>
         <button>Envoyer</button>
       </div>
     );

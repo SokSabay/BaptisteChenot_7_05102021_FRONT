@@ -30,7 +30,7 @@ axios.interceptors.response.use(
     // Do something with response error
     if (error) {
 
-      window.location.replace("http://localhost:3000/signup");
+      // window.location.replace("http://localhost:3000/signup");
     }
     return Promise.reject(error);
   }

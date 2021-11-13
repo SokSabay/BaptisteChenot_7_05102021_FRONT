@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DeleteArticle from "./posts/DeleteArticle";
-import Comment from "./posts/Comment"
+import Comment from "./posts/Comment";
 const Card = ({ post }) => {
   const [user, setUser] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -13,7 +13,7 @@ const Card = ({ post }) => {
   }, []);
 
   const userId = post.userId;
-const localUser = localStorage.getItem("userId");
+  const localUser = localStorage.getItem("userId");
   const getUser = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/auth/` + `${userId}`)

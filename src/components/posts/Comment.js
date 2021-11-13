@@ -31,7 +31,7 @@ const Comment = ({ post }) => {
       })
       .then(() => {
         setNewComment("");
-        // getData();
+        getData();
       });
   };
 
@@ -41,13 +41,15 @@ const Comment = ({ post }) => {
         <div className="comment">
           <div>
             <button onClick={() => setIsComment(false)}>Valider</button>
-            <form onSubmit={(e) => handleSubmit(e)}>
+           
+            <form onSubmit={(e) => handleSubmit(e)} >
               <textarea
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Mon message.."
                 value={newComment}
               ></textarea>
               <input type="submit" value="Envoyer" />
+            
             </form>
           </div>
           <ul className="flexCard">
