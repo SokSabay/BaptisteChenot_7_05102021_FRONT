@@ -3,22 +3,20 @@ import axios from "axios";
 import Create from "../comments/Create";
 
 const Comment = ({ post }) => {
-
   const [newsData, setNewsData] = useState([]);
   const [newComment, setNewComment] = useState([]);
   const [comment, setIsComment] = useState(false);
-  console.log(newsData);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/messages/post/`+ post.id)
-    .then((res) => {
-
-      setNewsData(res.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/messages/post/` + post.id)
+      .then((res) => {
+        setNewsData(res.data);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -41,15 +39,14 @@ const Comment = ({ post }) => {
         <div className="comment">
           <div>
             <button onClick={() => setIsComment(false)}>Valider</button>
-           
-            <form onSubmit={(e) => handleSubmit(e)} >
+
+            <form onSubmit={(e) => handleSubmit(e)}>
               <textarea
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Mon message.."
                 value={newComment}
               ></textarea>
               <input type="submit" value="Envoyer" />
-            
             </form>
           </div>
           <ul className="flexCard">
@@ -57,7 +54,6 @@ const Comment = ({ post }) => {
               <Create key={comment.id} post={comment} />
             ))}
           </ul>
- 
         </div>
       ) : (
         <button onClick={() => setIsComment(true)}>Commenter</button>

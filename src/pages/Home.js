@@ -6,41 +6,34 @@ import Navbar from "../components/Navbar";
 const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [title, setTitle] = useState([]);
-  const [imageUrl, setImageUrl] = useState();
-  const [gif, setGif] = useState([]);
-  console.log(newsData);
+  // const [gif, setGif] = useState([]);
+  const [filename, setFilename] = useState("");
 
   const token = localStorage.getItem("token");
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  console.log(imageUrl);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/posts/`)
-      .then((res) => {
-        setNewsData(res.data);
-      })
-      .catch((err) => console.log(err));
+    axios.get(`${process.env.REACT_APP_API_URL}/posts/`).then((res) => {
+      setNewsData(res.data);
+    });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/posts/`, {
-        title,
-        attachment: gif,
-        imageUrl,
-        id: localStorage.getItem("userId"),
-      })
-      .then(() => {
-        setTitle("");
-        setGif("");
-        setImageUrl("");
-        getData();
-      });
+    let file = filename;
+    let data = new FormData();
+    data.append("title", title);
+    data.append("id", localStorage.getItem("userId"));
+    data.append("image", file);
+    axios.post(`${process.env.REACT_APP_API_URL}/posts/`, data, {}).then(() => {
+      setTitle("");
+      setFilename("");
+      //  setGif("");
+      getData();
+    });
   };
   return (
     <div>
@@ -56,17 +49,18 @@ const Home = () => {
         />
         <br />
         <br />
-        <textarea
+        {/* <textarea
           onChange={(e) => setGif(e.target.value)}
           placeholder="Lien du gif"
           value={gif}
-        ></textarea>
+        ></textarea> */}
         <br />
         <br />
         <label htmlFor="file">File</label>
         <input
-          onChange={(e) => setImageUrl(e.target.files[0])}
+          onChange={(e) => setFilename(e.target.files[0])}
           type="file"
+          name="file"
           id="file"
           accept=".gif"
         />

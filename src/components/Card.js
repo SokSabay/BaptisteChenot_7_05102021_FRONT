@@ -6,7 +6,7 @@ const Card = ({ post }) => {
   const [user, setUser] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditTitle] = useState("");
-  const [editedGif, setEditGif] = useState("");
+   const [editFilename, setEditFilename] = useState("");
 
   useEffect(() => {
     getUser();
@@ -25,7 +25,7 @@ const Card = ({ post }) => {
   const handleEdit = () => {
     const data = {
       title: editedTitle ? editedTitle : post.title,
-      attachment: editedGif ? editedGif : post.attachment,
+
     };
 
     axios
@@ -61,20 +61,19 @@ const Card = ({ post }) => {
             autoFocus
             defaultValue={editedTitle ? editedTitle : post.title}
           ></textarea>
-          <textarea
-            onChange={(e) => setEditGif(e.target.value)}
-            autoFocus
-            defaultValue={editedGif ? editedGif : post.attachment}
-          ></textarea>
+          <label htmlFor="file">File</label>
+          <input
+            onChange={(e) => setEditFilename(e.target.files[0])}
+            type="file"
+            name="file"
+            id="file"
+            accept=".gif"
+          />
         </>
       ) : (
         <>
           <h2>{editedTitle ? editedTitle : post.title}</h2>
-          <img
-            src={editedGif ? editedGif : post.attachment}
-            alt="funny GIF"
-            width=""
-          />
+          <img src={post.imageUrl} alt="" />
         </>
       )}
 
