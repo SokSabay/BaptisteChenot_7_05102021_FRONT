@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [title, setTitle] = useState([]);
-  // const [gif, setGif] = useState([]);
+
   const [filename, setFilename] = useState("");
 
   const token = localStorage.getItem("token");
@@ -28,6 +28,7 @@ const Home = () => {
     data.append("title", title);
     data.append("id", localStorage.getItem("userId"));
     data.append("image", file);
+    
     axios.post(`${process.env.REACT_APP_API_URL}/posts/`, data, {}).then(() => {
       setTitle("");
       setFilename("");

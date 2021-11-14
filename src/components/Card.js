@@ -6,7 +6,7 @@ const Card = ({ post }) => {
   const [user, setUser] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditTitle] = useState("");
-   const [editFilename, setEditFilename] = useState("");
+  const [editedFilename, setEditFilename] = useState("");
 
   useEffect(() => {
     getUser();
@@ -23,14 +23,15 @@ const Card = ({ post }) => {
   };
 
   const handleEdit = () => {
-    const data = {
-      title: editedTitle ? editedTitle : post.title,
-
-    };
+    // let file = editedFilename;
+    let data = new FormData();
+    data.append("title", editedTitle ? editedTitle : post.title);
+    data.append("image", editedFilename ? editedFilename : post.imageUrl);
 
     axios
-      .put(`${process.env.REACT_APP_API_URL}/posts/` + post.id, data)
+      .put(`${process.env.REACT_APP_API_URL}/posts/` + post.id, data,)
       .then(() => {
+
         setIsEditing(false);
       });
   };
@@ -73,7 +74,7 @@ const Card = ({ post }) => {
       ) : (
         <>
           <h2>{editedTitle ? editedTitle : post.title}</h2>
-          <img src={post.imageUrl} alt="" />
+          <img src={editedFilename ? editedFilename : post.imageUrl} alt="" />
         </>
       )}
 
