@@ -39,41 +39,38 @@ const Home = () => {
   return (
     <div>
       <Navbar />
+      <div className="home">
+        <form className="sendPost" onSubmit={(e) => handleSubmit(e)}>
+          <h2>Nouveau post : </h2>
+          <input
+            onChange={(e) => setTitle(e.target.value)}
+            type="Titre"
+            placeholder="Quoi de neuf..."
+            value={title}
+          />
 
-      <form className="post" onSubmit={(e) => handleSubmit(e)}>
-        <h2>Nouveau post</h2>
-        <input
-          onChange={(e) => setTitle(e.target.value)}
-          type="Titre"
-          placeholder="Nom"
-          value={title}
-        />
-        <br />
-        <br />
-        {/* <textarea
-          onChange={(e) => setGif(e.target.value)}
-          placeholder="Lien du gif"
-          value={gif}
-        ></textarea> */}
-        <br />
-        <br />
-        <label htmlFor="file">File</label>
-        <input
-          onChange={(e) => setFilename(e.target.files[0])}
-          type="file"
-          name="file"
-          id="file"
-          accept=".gif"
-        />
+          <br />
+          <br />
+          <div>
 
-        <input type="submit" value="Envoyer" />
-      </form>
+            <input
+              onChange={(e) => setFilename(e.target.files[0])}
+              type="file"
+              name="file"
+              id="file"
+              accept=".gif"
+            />
+          </div>
 
-      <ul className="flexCard">
-        {newsData.map((post) => (
-          <Card key={post.id} post={post} />
-        ))}
-      </ul>
+          <input type="submit" value="Envoyer" />
+        </form>
+
+        <ul className="flexCard">
+          {newsData.map((post) => (
+            <Card key={post.id} post={post} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

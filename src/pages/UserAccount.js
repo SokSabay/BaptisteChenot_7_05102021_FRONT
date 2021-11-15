@@ -18,45 +18,49 @@ const UserAccount = () => {
         setUser(res.data);
       });
   };
-      const handleEdit = () => {
-        const data = {
-          username: editedUser ? editedUser : user.username,
-        };
+  const handleEdit = () => {
+    const data = {
+      username: editedUser ? editedUser : user.username,
+    };
 
-        axios
-          .put(`${process.env.REACT_APP_API_URL}/auth/` + localUser, data)
-          .then(() => {
-            localStorage.setItem("username", user.username);
-            setIsEditing(false);
-          });
-      };
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/auth/` + localUser, data)
+      .then(() => {
+        localStorage.setItem("username", editedUser);
+        setIsEditing(false);
+      });
+  };
 
   console.log(user);
   return (
     <div>
       <Navbar />
-      <div className="form">
-        <h2>Account Settings</h2>
-
-        <h3>Photo de profil</h3>
-        <div>
-          <h3>Username</h3>
-          {isEditing ? (
-            <textarea
-              onChange={(e) => setEditUser(e.target.value)}
-              autoFocus
-              defaultValue={editedUser ? editedUser : user.username}
-            ></textarea>
-          ) : (
-            <p>{editedUser ? editedUser : user.username}</p>
-          )}
-          <>
+      <div className="profil">
+        <div className="sendPost">
+          <h2>Account Settings</h2>
+          <br />
+          <br />
+          <div>
+            <h3>Username</h3>
             {isEditing ? (
-              <button onClick={handleEdit}>Valider</button>
+              <textarea
+                onChange={(e) => setEditUser(e.target.value)}
+                autoFocus
+                defaultValue={editedUser ? editedUser : user.username}
+              ></textarea>
             ) : (
-              <button onClick={() => setIsEditing(true)}>Edit</button>
+              <p>{editedUser ? editedUser : user.username}</p>
             )}
-          </>
+            <>
+              {isEditing ? (
+                <button onClick={handleEdit}>Valider</button>
+              ) : (
+                <button onClick={() => setIsEditing(true)}>
+                  <i className="far fa-edit"></i>
+                </button>
+              )}
+            </>
+          </div>
         </div>
       </div>
     </div>

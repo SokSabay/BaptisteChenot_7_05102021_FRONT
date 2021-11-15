@@ -1,8 +1,13 @@
 .post {
-    margin: 1em auto;
+     margin: 1em auto;
     width: 50%;
     padding: 1em;
-    border: solid 2px red;
+   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 30px;
+    h4 {
+        color: #626262;
+        text-decoration: underline;
+    }
     div {
         display: flex;
         justify-content: space-between;
@@ -10,6 +15,10 @@
     img {
         width: 100%;
     }
+    
+  @media screen and(max-width: 580px) {
+      width: 90%;
+  }
 }
 .flexCard {
     display: flex;

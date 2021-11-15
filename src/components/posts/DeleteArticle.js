@@ -13,7 +13,7 @@ const DeleteArticle = ({ id }) => {
           handleDelete();
       }}
     >
-      Supprimer
+      <i className="far fa-trash-alt"></i>
     </button>
   );
 };

@@ -34,31 +34,36 @@ const Comment = ({ post }) => {
   };
 
   return (
-    <div>
+    <>
       {comment ? (
-        <div className="comment">
-          <div>
-            <button onClick={() => setIsComment(false)}>Valider</button>
-
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <textarea
-                onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Mon message.."
-                value={newComment}
-              ></textarea>
-              <input type="submit" value="Envoyer" />
-            </form>
-          </div>
-          <ul className="flexCard">
+        <div className="message2">
+          <ul className="">
             {newsData.map((comment) => (
               <Create key={comment.id} post={comment} />
             ))}
           </ul>
+
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <textarea
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Mon message.."
+              value={newComment}
+            ></textarea>
+            <input className="inputCom" type="submit" value="Envoyer" />
+          </form>
+          <button onClick={() => setIsComment(false)}>Fermer</button>
         </div>
       ) : (
-        <button onClick={() => setIsComment(true)}>Commenter</button>
+        <div className="likeCom">
+          <button>
+            <i className="far fa-thumbs-up"></i>
+          </button>
+          <button onClick={() => setIsComment(true)}>
+            <i className="far fa-comments"></i>
+          </button>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

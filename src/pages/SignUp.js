@@ -15,48 +15,58 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(email);
+    console.log(username);
+    console.log(password);
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
-        email,
-        username,
-        password,
+        email: email,
+        username: username,
+        password: password,
       })
       .then((res) => {
         console.log(res);
-    <Redirect to="/login" />;
-      });
+        console.log(res.data.errors);
+        window.location = "/login";
+      })
+      .catch((err) => console.log(err));
+  
   };
-
+ 
   return (
     <div>
       <Navbar />
-      <form onSubmit={(e) => handleSubmit(e)} className="form">
-      <h1>Create account</h1>
-        <p>Username</p>
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-          name="username"
-          id="username"
-        />
-        <p>Email</p>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          name="email"
-          id="email"
-        />
-        <p>Password</p>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          name="password"
-          id="password"
-        />
-        <br />
-        <br />
-        <input type="submit" value="GET STARTED" />
-      </form>
+      <div className="profil">
+        <form onSubmit={(e) => handleSubmit(e)} className="sendPost">
+          <h1>Create account</h1>
+          <br />
+          <p>Username</p>
+          <input
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            name="username"
+            id="username"
+          />
+          <p>Email</p>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            name="email"
+            id="email"
+          />
+          <p>Password</p>
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            name="password"
+            id="password"
+          />
+          <br />
+          <br />
+          <input type="submit" value="GET STARTED" />
+        </form>
+        
+      </div>
     </div>
   );
 };

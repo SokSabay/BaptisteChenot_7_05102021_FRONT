@@ -1,4 +1,25 @@
 .comment {
-    display: flex;
-    flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
+  
+}
+textarea {
+  padding: 5px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+textarea:focus {
+  border-color: #333;
+}
+
+ .inputCom{
+  width: 100%;
+  height: 3em;
+  padding: 12 px 20 px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  color: black;
+  background-color: #c4c4c4;
 }
