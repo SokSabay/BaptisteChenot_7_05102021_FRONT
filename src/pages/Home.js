@@ -28,11 +28,10 @@ const Home = () => {
     data.append("title", title);
     data.append("id", localStorage.getItem("userId"));
     data.append("image", file);
-    
+
     axios.post(`${process.env.REACT_APP_API_URL}/posts/`, data, {}).then(() => {
       setTitle("");
       setFilename("");
-      //  setGif("");
       getData();
     });
   };
@@ -52,7 +51,6 @@ const Home = () => {
           <br />
           <br />
           <div>
-
             <input
               onChange={(e) => setFilename(e.target.files[0])}
               type="file"

@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { Redirect } from "react-router";
+import { useHistory } from "react-router";
 
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+const history = useHistory()
 
-  //   useEffect(() => {
-  //     getData();
-  //   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(username);
-    console.log(password);
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
         email: email,
@@ -25,11 +21,11 @@ const SignUp = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res);
         console.log(res.data.errors);
-        window.location = "/login";
+        history.push("/login");
+
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setErrorMessage("Create account failed"));
   
   };
  
@@ -47,6 +43,7 @@ const SignUp = () => {
             name="username"
             id="username"
           />
+          {errorMessage && <p>Username between 6 - 12 character</p>}
           <p>Email</p>
           <input
             onChange={(e) => setEmail(e.target.value)}
@@ -63,9 +60,9 @@ const SignUp = () => {
           />
           <br />
           <br />
+          {errorMessage && <p>{errorMessage}</p>}
           <input type="submit" value="GET STARTED" />
         </form>
-        
       </div>
     </div>
   );
