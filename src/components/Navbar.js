@@ -10,7 +10,7 @@ const Navbar = () => {
   const handleLogout = (e) => {
     localStorage.clear();
     axios.defaults.headers.common["Authorization"] = `Bearer null`;
-    history.push("/");
+    history.push("/login");
   };
 
   return (

@@ -59,10 +59,12 @@ const Home = () => {
         <form className="sendPost" onSubmit={(e) => handleSubmit(e)}>
           <h2>Nouveau post : </h2>
           <input
+            label="Outlined"
             onChange={(e) => setTitle(e.target.value)}
             type="Titre"
             placeholder="Quoi de neuf..."
             value={title}
+            type="text"
           />
 
           <br />
