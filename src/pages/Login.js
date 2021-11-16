@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-
+import { useHistory } from "react-router";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -15,12 +16,12 @@ const Login = () => {
       })
       .then((res) => {
         console.log(res.data);
-      
+
         localStorage.setItem("userId", res.data.userId);
         localStorage.setItem("username", res.data.username);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("isAdmin", res.data.isAdmin);
-        //  window.location = "/";
+        history.push("/");
       })
       .catch((err) => console.log(err));
   };

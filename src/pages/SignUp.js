@@ -46,6 +46,7 @@ const history = useHistory()
           {errorMessage && <p>Username between 6 - 12 character</p>}
           <p>Email</p>
           <input
+            style={{ textTransform: "lowercase" }}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             name="email"

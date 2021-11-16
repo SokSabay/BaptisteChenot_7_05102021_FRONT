@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [title, setTitle] = useState([]);
-
   const [filename, setFilename] = useState("");
 
   const token = localStorage.getItem("token");

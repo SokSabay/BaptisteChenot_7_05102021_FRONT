@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import DeleteUser from "../components/users/DeleteUser";
 
 const UserAccount = () => {
   //get user info
@@ -8,6 +9,7 @@ const UserAccount = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditUser] = useState("");
   const localUser = localStorage.getItem("userId");
+ 
   useEffect(() => {
     getUser();
   }, []);
@@ -17,6 +19,12 @@ const UserAccount = () => {
       .then((res) => {
         setUser(res.data);
       });
+  };
+  const handleDelete = () => {
+    axios.delete(`${process.env.REACT_APP_API_URL}/auth/` + localUser);
+       localStorage.clear();
+       axios.defaults.headers.common["Authorization"] = `Bearer null`;
+       window.location = "/";
   };
   const handleEdit = () => {
     const data = {
@@ -61,6 +69,14 @@ const UserAccount = () => {
               )}
             </>
           </div>
+          <button
+            onClick={() => {
+              if (window.confirm("Voulez-vous supprimer cet article ?"))
+                handleDelete();
+            }}
+          >
+            Delete Account
+          </button>
         </div>
       </div>
     </div>

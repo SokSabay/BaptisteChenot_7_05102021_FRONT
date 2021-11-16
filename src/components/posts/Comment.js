@@ -10,7 +10,7 @@ const Comment = ({ post }) => {
   useEffect(() => {
     getData();
   }, []);
-
+console.log(newsData.length);
   const getData = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/messages/post/` + post.id)
@@ -55,11 +55,11 @@ const Comment = ({ post }) => {
         </div>
       ) : (
         <div className="likeCom">
-          <button>
+          {/* <button>
             <i className="far fa-thumbs-up"></i>
-          </button>
+          </button> */}
           <button onClick={() => setIsComment(true)}>
-            <i className="far fa-comments"></i>
+            <i className="far fa-comments"></i>  ({newsData.length})
           </button>
         </div>
       )}

@@ -63,22 +63,7 @@ const Card = ({ post }) => {
             <DeleteArticle id={post.id} />
           </div>
         ) : null}
-        {/* 
-        {localUser == post.userId ? (
-          <div>
-            {isEditing ? (
-              <button onClick={handleEdit}>Valider</button>
-            ) : (
-              <button onClick={() => setIsEditing(true)}>
-                <i className="far fa-edit"></i>
-              </button>
-            )}
-
-            <DeleteArticle id={post.id} />
-          </div>
-        ) : (
-          <></>
-        )} */}
+    
       </div>
       {isEditing ? (
         <>
