@@ -2,11 +2,15 @@ import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { useHistory } from "react-router";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
 
+  // Permet de se connecter avec l'email et le password
+  //  et stock les informations de l'utilisater
   const handleLogin = (e) => {
     e.preventDefault();
     axios
@@ -15,15 +19,13 @@ const Login = () => {
         password,
       })
       .then((res) => {
-        console.log(res.data);
-
         localStorage.setItem("userId", res.data.userId);
         localStorage.setItem("username", res.data.username);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("isAdmin", res.data.isAdmin);
         history.push("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setErrorMessage("Create account failed"));
   };
   return (
     <div>
@@ -45,6 +47,7 @@ const Login = () => {
             type="password"
             name=""
           />
+          {errorMessage && <p className="erroMessage">Unknown user</p>}
           <br />
           <br />
           <input type="submit" value="LOGIN" />

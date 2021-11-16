@@ -7,7 +7,7 @@ import SignUp from "./pages/SignUp";
 import UserAccount from "./pages/UserAccount";
 
 
-
+// Création des différentes routes
 const App = () => (
   <BrowserRouter>
     <Switch>

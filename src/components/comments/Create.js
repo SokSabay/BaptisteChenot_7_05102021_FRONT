@@ -4,13 +4,14 @@ import DeleteComment from "./DeleteComment";
 
 const Create = ({ post }) => {
   const [user, setUser] = useState([]);
-  const localUser = localStorage.getItem("userId");
   const [isEditing, setIsEditing] = useState(false);
   const [editedComment, setEditComment] = useState("");
+  const isAdmin = localStorage.getItem("isAdmin");
+
   useEffect(() => {
     getUser();
   }, []);
-
+  // obtenier nom de l'utilisateyr qui a posté un commentaire
   const getUser = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/auth/` + post.userId)
@@ -18,6 +19,7 @@ const Create = ({ post }) => {
         setUser(res.data);
       });
   };
+  // permet de modifier un commentaire
   const handleEdit = () => {
     const data = {
       title: editedComment ? editedComment : post.comment,
@@ -31,7 +33,11 @@ const Create = ({ post }) => {
   };
   return (
     <>
-      <p>{user.username} :</p>
+      {user.username ? (
+        <p className="styleUser">{user.username} :</p>
+      ) : (
+        <p className="styleUseritalic">deleted user :</p>
+      )}
       <div className="message">
         <div className="reponse">
           {isEditing ? (
@@ -45,7 +51,7 @@ const Create = ({ post }) => {
           )}
         </div>
 
-        {localUser == post.userId ? (
+        {isAdmin === "true" ? (
           <>
             {isEditing ? (
               <button onClick={handleEdit}>Valider</button>

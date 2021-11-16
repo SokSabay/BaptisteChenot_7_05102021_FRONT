@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useHistory } from "react-router";
-
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-const history = useHistory()
+  const history = useHistory();
 
-
+  // Création d'un nouveau compte
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -21,14 +20,11 @@ const history = useHistory()
         password: password,
       })
       .then((res) => {
-        console.log(res.data.errors);
         history.push("/login");
-
       })
       .catch((err) => setErrorMessage("Create account failed"));
-  
   };
- 
+
   return (
     <div>
       <Navbar />
@@ -43,7 +39,9 @@ const history = useHistory()
             name="username"
             id="username"
           />
-          {errorMessage && <p>Username between 6 - 12 character</p>}
+          {errorMessage && (
+            <p className="erroMessage">Username between 6 - 12 character</p>
+          )}
           <p>Email</p>
           <input
             style={{ textTransform: "lowercase" }}

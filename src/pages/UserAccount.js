@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import DeleteUser from "../components/users/DeleteUser";
 
 const UserAccount = () => {
   //get user info
@@ -9,10 +8,12 @@ const UserAccount = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditUser] = useState("");
   const localUser = localStorage.getItem("userId");
- 
+
   useEffect(() => {
     getUser();
   }, []);
+
+  // Fonction pour obtenir les informations de l'utilisateur connecté !
   const getUser = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/auth/` + localUser)
@@ -20,12 +21,16 @@ const UserAccount = () => {
         setUser(res.data);
       });
   };
+
+  // Fonction pour supprimer l'utilisateur connecté !
   const handleDelete = () => {
     axios.delete(`${process.env.REACT_APP_API_URL}/auth/` + localUser);
-       localStorage.clear();
-       axios.defaults.headers.common["Authorization"] = `Bearer null`;
-       window.location = "/";
+    localStorage.clear();
+    axios.defaults.headers.common["Authorization"] = `Bearer null`;
+    window.location = "/";
   };
+
+  // Permet d'éditer le profil
   const handleEdit = () => {
     const data = {
       username: editedUser ? editedUser : user.username,
@@ -39,7 +44,6 @@ const UserAccount = () => {
       });
   };
 
-  console.log(user);
   return (
     <div>
       <Navbar />

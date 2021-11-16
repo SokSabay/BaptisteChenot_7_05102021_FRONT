@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const Navbar = () => {
   const user = localStorage.getItem("userId");
-
+  const history = useHistory();
+  // Déconnect l'utilisateur et supprime ses infrormations enregistré en local
   const handleLogout = (e) => {
     localStorage.clear();
     axios.defaults.headers.common["Authorization"] = `Bearer null`;
-    window.location = "/";
+    history.push("/");
   };
 
   return (
@@ -17,11 +19,7 @@ const Navbar = () => {
         <div className="logo">
           <NavLink exact to="/">
             <div className="logo">
-              <img
-                className="image1"
-                src="./img/groupomania.png"
-                alt="icon"
-              />
+              <img className="image1" src="./img/groupomania.png" alt="icon" />
               <img className="image2" src="./img/group.png" alt="icon" />
             </div>
           </NavLink>

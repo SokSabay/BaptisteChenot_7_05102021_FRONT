@@ -10,7 +10,8 @@ const Comment = ({ post }) => {
   useEffect(() => {
     getData();
   }, []);
-console.log(newsData.length);
+
+  //Obtient les commentaires
   const getData = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/messages/post/` + post.id)
@@ -19,6 +20,7 @@ console.log(newsData.length);
       });
   };
 
+  //Création d'un nouveau commentaire
   const handleSubmit = (e) => {
     e.preventDefault();
     axios

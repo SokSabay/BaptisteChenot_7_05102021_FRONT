@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteArticle from "./posts/DeleteArticle";
 import Comment from "./posts/Comment";
+
 const Card = ({ post }) => {
   const [user, setUser] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -14,15 +15,16 @@ const Card = ({ post }) => {
   const localUser = localStorage.getItem("userId");
   const isAdmin = localStorage.getItem("isAdmin");
  
+  // Permet d'obtenir les informs utilisateurs pour chaque posts
   const getUser = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/auth/` + `${post.userId}`)
       .then((res) => {
-        console.log(res);
         setUser(res.data);
       });
   };
 
+  // Cette fonction permet à l'admin de modifier les posts
   const handleEdit = () => {
     let data = new FormData();
     data.append("title", editedTitle ? editedTitle : post.title);
@@ -39,7 +41,12 @@ const Card = ({ post }) => {
   return (
     <div className="post">
       <div className="postHeader">
-        <h4>{user.username}</h4>
+        {user.username ? (
+          <p className="styleUser">{user.username}</p>
+        ) : (
+          <p className="styleUseritalic">deleted user</p>
+        )}
+
         {isAdmin === "true" ? (
           <div>
             {isEditing ? (
@@ -52,18 +59,17 @@ const Card = ({ post }) => {
             <DeleteArticle id={post.id} />
           </div>
         ) : localUser == post.userId ? (
-                   <div>
-            {isEditing ? (
+          <div>
+            {/* {isEditing ? (
               <button onClick={handleEdit}>Valider</button>
             ) : (
               <button onClick={() => setIsEditing(true)}>
                 <i className="far fa-edit"></i>
               </button>
             )}
-            <DeleteArticle id={post.id} />
+            <DeleteArticle id={post.id} /> */}
           </div>
         ) : null}
-    
       </div>
       {isEditing ? (
         <>

@@ -38,13 +38,14 @@ nav {
   .myButton {
     background-color: #c4c4c4;
     border-radius: 28px;
-
+    font-family: $font-1;
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
-    font-family: Arial;
-    font-size: 12px;
-    padding: 16px 31px;
+    // font-size: 1.2rem;
+
+    font-weight: 700;
+    padding: 16px 21px;
     text-decoration: none;
   }
   .myButton:hover {
@@ -94,18 +95,18 @@ nav {
       .welcome {
         transform: translateY(2px);
 
-
         h5 {
           font-family: $font-3;
         }
       }
 
       li {
-		  margin: 10px;
+        margin: 10px;
         a {
           color: $white;
           font-family: $font-1;
           // font-size: large;
+          font-size: 1.2rem;
           font-weight: 700;
         }
 

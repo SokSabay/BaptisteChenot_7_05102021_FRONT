@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import Navbar from "../components/Navbar";
+import { useHistory } from "react-router";
 
 const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [title, setTitle] = useState([]);
   const [filename, setFilename] = useState("");
+  const history = useHistory();
 
   const token = localStorage.getItem("token");
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -15,11 +17,27 @@ const Home = () => {
     getData();
   }, []);
 
+  // Affiche tous les posts existants
+  // si erreur 401 (utilisateur déconnect) renvoie vers la page de connexion
   const getData = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/posts/`).then((res) => {
       setNewsData(res.data);
     });
   };
+
+  axios.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error.response.status === 401) {
+        history.push("/login");
+      }
+      return error;
+    }
+  );
+
+  // Création d'un nouveau post
   const handleSubmit = (e) => {
     e.preventDefault();
     let file = filename;
@@ -59,7 +77,7 @@ const Home = () => {
             />
           </div>
 
-          <input type="submit" value="Envoyer" />
+          <input type="submit" value="SEND" />
         </form>
 
         <ul className="flexCard">
